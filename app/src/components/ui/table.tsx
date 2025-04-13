@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Card } from './card';
 import { LoadingState } from '@/types/ui';
+import { cn } from 'app/lib/utils';
 
 interface TableProps {
   data: any[];

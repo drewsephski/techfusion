@@ -1,7 +1,7 @@
 // src/app/lib/api/products/featured/route.ts
 import { db } from './db';
 import { NextResponse } from 'next/server';
-import { Product } from '../types/product';
+import { Product } from '../src/types/product';
 
 export async function GET() {
   try {

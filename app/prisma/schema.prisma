@@ -11,7 +11,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "@/generated/prisma"
 }
 
 model User {
@@ -20,20 +20,8 @@ model User {
   name          String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  subscriptions Subscription[]
+  cart          Cart?
   reviews       Review[]
-}
-
-model Subscription {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  plan      String
-  status    String   @default("active")
-  startDate DateTime @default(now())
-  endDate   DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Product {
@@ -45,10 +33,31 @@ model Product {
   features        String[]
   images          String[]
   featured        Boolean          @default(false)
+  priority        Int              @default(0)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   reviews         Review[]
-  featuredProduct FeaturedProduct?
+  cartItems       CartItem[]
+}
+
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Review {
@@ -57,21 +66,8 @@ model Review {
   product   Product  @relation(fields: [productId], references: [id])
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  rating    Int
+  rating    Int      @min(1) @max(5)
   comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model FeaturedProduct {
-  id        String    @id @default(cuid())
-  productId String    @unique
-  product   Product   @relation(fields: [productId], references: [id])
-  priority  Int       @default(0)
-  startDate DateTime
-  endDate   DateTime
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  startedAt DateTime?
-  endedAt   DateTime?
 }

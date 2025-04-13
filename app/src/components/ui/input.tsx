@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InputProps } from '@/types/ui';
 import { useErrorBoundary } from './error-boundary';
-import { cn } from "@/lib/utils"
+import { cn } from "app/lib/utils"
 
 export function Input({ 
   id, 

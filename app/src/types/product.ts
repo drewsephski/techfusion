@@ -12,21 +12,12 @@ export interface Review {
 export interface Product {
   id: string;
   name: string;
-  description: string;
-  price: number;
-  category: string;
-  features: string[];
-  images: string[];
   mainImage: string;
-  specs: Record<string, string>;
-  rating?: number;
-  reviewCount?: number;
-  reviews?: Review[];
-  options?: Record<string, string | number | boolean>;
-  stock: number;
-  createdAt: string;
-  updatedAt: string;
-  featured: boolean;
+  images: string[];
+  price: number;
+  description: string;
+  specs?: Record<string, string>;
+  rating?: number;  // Add this line
 }
 
 export interface SimpleProduct {

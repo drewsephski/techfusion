@@ -32,7 +32,7 @@ export function ProductGallery({ product, className }: ProductGalleryProps) {
 
       {product.images.length > 1 && (
         <div className="flex gap-2 mt-4">
-          {product.images.map((image, index) => (
+          {product.images.map((image: string, index: number) => (
             <button
               key={image}
               onClick={() => handleImageClick(index)}

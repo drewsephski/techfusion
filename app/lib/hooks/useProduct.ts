@@ -1,6 +1,6 @@
 // src/lib/hooks/useProduct.ts
 import { useQuery } from "@tanstack/react-query";
-import { getProductById } from '@/lib/api/products';
+import { getProductById } from 'app/lib/api/products';
 
 export function useProduct(productId: string) {
   return useQuery({

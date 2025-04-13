@@ -1,8 +1,8 @@
 // src/app/lib/product-hunt.ts
-import { ProductHuntPost } from '../types/product-hunt';
+import { ProductHuntPost } from '../src/types/product-hunt';
 import { cache } from 'react';
 import { z } from 'zod';
-import { logger } from '@/lib/logger';
+import { logger } from 'app/lib/logger';
 
 const PRODUCT_HUNT_API_KEY = process.env.PRODUCT_HUNT_API_KEY;
 if (!PRODUCT_HUNT_API_KEY) {

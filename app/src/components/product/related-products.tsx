@@ -6,7 +6,7 @@ import { useProductContext } from '@/contexts/product-context';
 import { Card } from '@/components/ui/card';
 import { ProductCard } from './product-card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useComponentState } from '@/lib/hooks/useComponentState';
+import { useComponentState } from 'app/lib/hooks/useComponentState';
 
 interface RelatedProductsProps {
   products?: Product[];

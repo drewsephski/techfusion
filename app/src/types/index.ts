@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { Product } from './product';
+import type { Product, CartItem, ApiResponse } from './types';
 
 export * from './product';
 

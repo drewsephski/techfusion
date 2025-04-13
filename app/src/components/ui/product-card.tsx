@@ -5,11 +5,11 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "app/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Product } from "@/types/product";
-import { trackProductView } from "@/lib/analytics/posthog";
+import { trackProductView } from "app/lib/analytics/posthog";
 import { useEffect } from "react";
 
 interface ProductCardProps {

@@ -6,7 +6,7 @@ import { RelatedProducts } from "@/components/product/related-products";
 import { ProductOptions } from "@/components/product/product-options";
 import { ProductSkeleton } from "@/components/product/product-skeleton"; 
 import { useCart } from "@/contexts/cart-context";
-import { useProduct } from '@/lib/hooks/useProduct';
+import { useProduct } from 'app/lib/hooks/useProduct';
 import { Product } from "@/types/product";
 import Link from "next/link";
 import { motion } from "framer-motion";

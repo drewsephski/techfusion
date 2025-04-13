@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["src"],
+  "out": "docs",
+  "mode": "modules",
+  "theme": "minimal",
+  "includeDeclarations": false,
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "name": "TechFusion Documentation"
+}

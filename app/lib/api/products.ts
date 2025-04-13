@@ -1,5 +1,5 @@
 import { Product, FetchProductsParams } from '@/types/product';
-import { db } from '@/lib/db';
+import { db } from 'app/lib/db';
 
 export interface ProductResponse {
   products: Product[];

@@ -13,7 +13,7 @@ import { LoadingSpinner } from "@/components/loading-spinner";
 import Footer from "@/components/footer";
 import { ScrollBehavior } from "@/components/scroll-behavior";
 import { Analytics } from '@vercel/analytics/react';
-import SentryErrorBoundary from '@/lib/sentry/error-boundary';
+import { SentryErrorBoundary } from 'app/lib/sentry/error-boundary';
 import { PostHogProvider } from './provider'
 
 const inter = Inter({

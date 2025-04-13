@@ -5,34 +5,59 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+    paths:
+      - '**.ts'
+      - '**.tsx'
+      - 'package.json'
+      - 'next.config.mjs'
+      - 'postcss.config.mjs'
+      - 'tailwind.config.ts'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
+      
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Required for Sentry
-      
+          submodules: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          
+          cache-dependency-path: package-lock.json
+
       - name: Install dependencies
         run: npm ci
-        
-      - name: Build
-        run: npm run build
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
         env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
-          
-      - name: Deploy
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        run: npm run deploy
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }} 
+          CI: true
+
+      - name: Generate Code Docs
+        run: |
+          npm run generate-docs
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add docs/
+          git commit -m "docs: update generated documentation" || true
+          git push origin main
+        if: github.ref == 'refs/heads/main'
+
+      
